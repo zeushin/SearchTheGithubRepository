@@ -79,6 +79,11 @@ extension ViewController: UISearchBarDelegate {
   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
     searchController.searchBar.setShowsCancelButton(false, animated: true)
   }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard let text = searchBar.text else { return }
+    viewModel.send(.searchButtonTapped(text))
+  }
 }
 
 extension ViewController: UITableViewDataSource {
