@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecentKeywordCell: UITableViewCell {
+final class RecentKeywordCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()

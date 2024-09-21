@@ -21,6 +21,7 @@
 		A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */; };
 		A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */; };
 		A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */; };
+		A51A8AD32C9EB93F00470AD3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		A51A8AB32C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTheGithubRepositoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAllCell.swift; sourceTree = "<group>"; };
 		A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentKeywordCell.swift; sourceTree = "<group>"; };
+		A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				A51A8A992C9E859D00470AD3 /* Assets.xcassets */,
 				A51A8A9B2C9E859D00470AD3 /* LaunchScreen.storyboard */,
 				A51A8A942C9E859C00470AD3 /* ViewController.swift */,
+				A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */,
 				A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */,
 				A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */,
 			);
@@ -308,6 +311,7 @@
 				A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */,
 				A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */,
 				A51A8A912C9E859C00470AD3 /* AppDelegate.swift in Sources */,
+				A51A8AD32C9EB93F00470AD3 /* ViewModel.swift in Sources */,
 				A51A8A932C9E859C00470AD3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

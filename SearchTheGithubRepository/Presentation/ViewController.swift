@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Combine
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
   
   private lazy var searchController: UISearchController = {
     let searchController = UISearchController(searchResultsController: nil)
@@ -21,15 +22,39 @@ class ViewController: UIViewController {
   }()
   
   @IBOutlet private weak var tableView: UITableView!
+  private var viewModel = ViewModel()
+  private var cancellables = Set<AnyCancellable>()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     
+    bindViewModel()
+    setupSearchBar()
+    setupSearchBarObserver()
+  }
+  
+}
+
+private extension ViewController {
+  func bindViewModel() {
+    
+  }
+  
+  func setupSearchBarObserver() {
+    searchController.searchBar
+      .publisher(for: \.text)
+      .compactMap { $0 }
+      .sink { [weak self] text in
+        print(text) // TODO: send to view model
+      }
+      .store(in: &cancellables)
+  }
+  
+  func setupSearchBar() {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
   }
-  
 }
 
 extension ViewController: UISearchResultsUpdating {

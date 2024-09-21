@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RemoveAllCell: UITableViewCell {
+final class RemoveAllCell: UITableViewCell {
   
   private let separatorView: UIView = {
     let view = UIView()
