@@ -18,11 +18,13 @@
 		A51A8AB42C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AB32C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift */; };
 		A51A8AC52C9E911200470AD3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC42C9E911200470AD3 /* CombineMoya */; };
 		A51A8AC82C9E91AE00470AD3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC72C9E91AE00470AD3 /* Kingfisher */; };
-		A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */; };
 		A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */; };
 		A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */; };
 		A51A8AD32C9EB93F00470AD3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */; };
 		A51A8AD52C9EC17E00470AD3 /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD42C9EC17E00470AD3 /* Keyword.swift */; };
+		A51A8AD72C9EFBD600470AD3 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD62C9EFBD600470AD3 /* SearchUseCase.swift */; };
+		A51A8AD92C9F08C800470AD3 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD82C9F08C800470AD3 /* RepositoryProtocol.swift */; };
+		A51A8ADB2C9F096400470AD3 /* RecentSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,9 @@
 		A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentKeywordCell.swift; sourceTree = "<group>"; };
 		A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A51A8AD42C9EC17E00470AD3 /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		A51A8AD62C9EFBD600470AD3 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
+		A51A8AD82C9F08C800470AD3 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +73,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A51A8AC82C9E91AE00470AD3 /* Kingfisher in Frameworks */,
-				A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */,
 				A51A8AC52C9E911200470AD3 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				A51A8AD42C9EC17E00470AD3 /* Keyword.swift */,
+				A51A8AD62C9EFBD600470AD3 /* SearchUseCase.swift */,
+				A51A8AD82C9F08C800470AD3 /* RepositoryProtocol.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -165,6 +171,7 @@
 		A51A8AC22C9E8E5C00470AD3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -188,7 +195,6 @@
 			packageProductDependencies = (
 				A51A8AC42C9E911200470AD3 /* CombineMoya */,
 				A51A8AC72C9E91AE00470AD3 /* Kingfisher */,
-				A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */,
 			);
 			productName = SearchTheGithubRepository;
 			productReference = A51A8A8D2C9E859C00470AD3 /* SearchTheGithubRepository.app */;
@@ -265,7 +271,6 @@
 			packageReferences = (
 				A51A8AC32C9E911200470AD3 /* XCRemoteSwiftPackageReference "Moya" */,
 				A51A8AC62C9E91AE00470AD3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 			);
 			productRefGroup = A51A8A8E2C9E859C00470AD3 /* Products */;
 			projectDirPath = "";
@@ -310,13 +315,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51A8ADB2C9F096400470AD3 /* RecentSearchRepository.swift in Sources */,
 				A51A8AD52C9EC17E00470AD3 /* Keyword.swift in Sources */,
 				A51A8A952C9E859C00470AD3 /* ViewController.swift in Sources */,
 				A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */,
 				A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */,
 				A51A8A912C9E859C00470AD3 /* AppDelegate.swift in Sources */,
+				A51A8AD72C9EFBD600470AD3 /* SearchUseCase.swift in Sources */,
 				A51A8AD32C9EB93F00470AD3 /* ViewModel.swift in Sources */,
 				A51A8A932C9E859C00470AD3 /* SceneDelegate.swift in Sources */,
+				A51A8AD92C9F08C800470AD3 /* RepositoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,14 +683,6 @@
 				minimumVersion = 8.0.2;
 			};
 		};
-		A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -695,11 +695,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A51A8AC62C9E91AE00470AD3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
-			productName = SwiftyUserDefaults;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

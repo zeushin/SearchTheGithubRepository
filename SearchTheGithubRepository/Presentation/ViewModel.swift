@@ -34,11 +34,12 @@ final class ViewModel {
   }
   
   @Published private(set) var state = State()
-  
   private var cancellables = Set<AnyCancellable>()
   private let actionSubject = PassthroughSubject<Action, Never>()
+  private let useCase: SearchUseCase
   
-  init() {
+  init(searchUseCase: SearchUseCase) {
+    useCase = searchUseCase
     bindActions()
     loadRecentSearches()
   }
@@ -55,8 +56,8 @@ private extension ViewModel {
       .flatMap { [weak self] action -> AnyPublisher<State, Never> in
         guard let self = self else { return Just(State()).eraseToAnyPublisher() }
         switch action {
-        case .searchButtonTapped(let query):
-          return self.performSearch(query: query)
+        case .searchButtonTapped(let text):
+          return self.performSearch(text: text)
         }
       }
       .receive(on: RunLoop.main)
@@ -67,27 +68,20 @@ private extension ViewModel {
   }
   
   func loadRecentSearches() {
-    DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [weak self] in
-      self?.state.recentSearches = [
-        Keyword(text: "1", updated: .now - 1),
-        Keyword(text: "2", updated: .now - 2),
-        Keyword(text: "3", updated: .now - 3),
-        Keyword(text: "4", updated: .now - 4),
-      ]
-    }
+    state.recentSearches = useCase.recentSearches
   }
   
-  func performSearch(query: String) -> AnyPublisher<State, Never> {
-    Just(query)
-      .map { query in
-        return self.saveRecentSearch(query: query)
+  func performSearch(text: String) -> AnyPublisher<State, Never> {
+    Just(text)
+      .map { text in
+        return self.saveRecentSearch(text: text)
       }.eraseToAnyPublisher()
   }
   
-  func saveRecentSearch(query: String) -> State {
-    // TODO: user defaults 에 저장후, 저장된 내용을 recent searches에 저장
+  func saveRecentSearch(text: String) -> State {
+    useCase.saveSearchText(text)
     var newState = state
-    newState.recentSearches.append(Keyword(text: query, updated: .now))
+    newState.recentSearches = useCase.recentSearches
     return newState
   }
 }

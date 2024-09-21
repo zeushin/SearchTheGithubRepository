@@ -22,7 +22,11 @@ final class ViewController: UIViewController {
   }()
   
   @IBOutlet private weak var tableView: UITableView!
-  private var viewModel = ViewModel()
+  private var viewModel = ViewModel(
+    searchUseCase: SearchUseCaseImpl(
+      recentSearchRepository: RecentSearchRepositoryImpl()
+    )
+  )
   private var cancellables = Set<AnyCancellable>()
   
   override func viewDidLoad() {
