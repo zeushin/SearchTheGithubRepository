@@ -19,6 +19,8 @@
 		A51A8AC52C9E911200470AD3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC42C9E911200470AD3 /* CombineMoya */; };
 		A51A8AC82C9E91AE00470AD3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC72C9E91AE00470AD3 /* Kingfisher */; };
 		A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */; };
+		A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */; };
+		A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		A51A8AAD2C9E859D00470AD3 /* SearchTheGithubRepositoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchTheGithubRepositoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51A8AB12C9E859D00470AD3 /* SearchTheGithubRepositoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTheGithubRepositoryUITests.swift; sourceTree = "<group>"; };
 		A51A8AB32C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTheGithubRepositoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAllCell.swift; sourceTree = "<group>"; };
+		A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentKeywordCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 				A51A8A992C9E859D00470AD3 /* Assets.xcassets */,
 				A51A8A9B2C9E859D00470AD3 /* LaunchScreen.storyboard */,
 				A51A8A942C9E859C00470AD3 /* ViewController.swift */,
+				A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */,
+				A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -299,6 +305,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A51A8A952C9E859C00470AD3 /* ViewController.swift in Sources */,
+				A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */,
+				A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */,
 				A51A8A912C9E859C00470AD3 /* AppDelegate.swift in Sources */,
 				A51A8A932C9E859C00470AD3 /* SceneDelegate.swift in Sources */,
 			);
