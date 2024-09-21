@@ -16,6 +16,9 @@
 		A51A8AA82C9E859D00470AD3 /* SearchTheGithubRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AA72C9E859D00470AD3 /* SearchTheGithubRepositoryTests.swift */; };
 		A51A8AB22C9E859D00470AD3 /* SearchTheGithubRepositoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AB12C9E859D00470AD3 /* SearchTheGithubRepositoryUITests.swift */; };
 		A51A8AB42C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AB32C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift */; };
+		A51A8AC52C9E911200470AD3 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC42C9E911200470AD3 /* CombineMoya */; };
+		A51A8AC82C9E91AE00470AD3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8AC72C9E91AE00470AD3 /* Kingfisher */; };
+		A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51A8AC82C9E91AE00470AD3 /* Kingfisher in Frameworks */,
+				A51A8ACB2C9E93B200470AD3 /* SwiftyUserDefaults in Frameworks */,
+				A51A8AC52C9E911200470AD3 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +173,11 @@
 			dependencies = (
 			);
 			name = SearchTheGithubRepository;
+			packageProductDependencies = (
+				A51A8AC42C9E911200470AD3 /* CombineMoya */,
+				A51A8AC72C9E91AE00470AD3 /* Kingfisher */,
+				A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */,
+			);
 			productName = SearchTheGithubRepository;
 			productReference = A51A8A8D2C9E859C00470AD3 /* SearchTheGithubRepository.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +250,11 @@
 				Base,
 			);
 			mainGroup = A51A8A842C9E859C00470AD3;
+			packageReferences = (
+				A51A8AC32C9E911200470AD3 /* XCRemoteSwiftPackageReference "Moya" */,
+				A51A8AC62C9E91AE00470AD3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
+			);
 			productRefGroup = A51A8A8E2C9E859C00470AD3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -625,6 +641,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A51A8AC32C9E911200470AD3 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		A51A8AC62C9E91AE00470AD3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.2;
+			};
+		};
+		A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A51A8AC42C9E911200470AD3 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A51A8AC32C9E911200470AD3 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		A51A8AC72C9E91AE00470AD3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A51A8AC62C9E91AE00470AD3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		A51A8ACA2C9E93B200470AD3 /* SwiftyUserDefaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A51A8AC92C9E93B200470AD3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
+			productName = SwiftyUserDefaults;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A51A8A852C9E859C00470AD3 /* Project object */;
 }
