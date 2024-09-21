@@ -38,7 +38,13 @@ final class ViewController: UIViewController {
 
 private extension ViewController {
   func bindViewModel() {
-    
+    viewModel.$state
+      .map { $0.recentSearches }
+      .receive(on: RunLoop.main)
+      .sink { [weak self] _ in
+        self?.tableView.reloadData()
+      }
+      .store(in: &cancellables)
   }
   
   func setupSearchBarObserver() {
@@ -77,23 +83,24 @@ extension ViewController: UISearchBarDelegate {
 
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var idid = ""
-    switch indexPath.row {
-    case 0:
-      idid = "AutoCompletionCell"
-    case 1:
-      idid = "RecentKeywordCell"
-    case 2:
-      idid = "RemoveAllCell"
-    default:
-      idid = "AutoCompletionCell"
-    }
-    let cell = tableView.dequeueReusableCell(withIdentifier: idid, for: indexPath)
+//    var idid = ""
+//    switch indexPath.row {
+//    case 0:
+//      idid = "AutoCompletionCell"
+//    case 1:
+//      idid = "RecentKeywordCell"
+//    case 2:
+//      idid = "RemoveAllCell"
+//    default:
+//      idid = "AutoCompletionCell"
+//    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.state.cellIdentifier, for: indexPath)
+    (cell as? RecentKeywordCell)?.keywordLabel.text = viewModel.state.cellKeyword(for: indexPath).text
     return cell
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+    return viewModel.state.numberOfRows
   }
 }
 

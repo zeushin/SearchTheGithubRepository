@@ -84,6 +84,9 @@
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="UJ4-fx-1RT" secondAttribute="trailing" id="voZ-nr-Xxo"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="keywordLabel" destination="UYC-cq-gxd" id="kIV-uU-Lcf"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemoveAllCell" textLabel="us5-Jy-sbv" detailTextLabel="nwu-L4-xuO" style="IBUITableViewCellStyleValue1" id="GTo-de-7Kp" customClass="RemoveAllCell" customModule="SearchTheGithubRepository" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="138" width="393" height="44"/>

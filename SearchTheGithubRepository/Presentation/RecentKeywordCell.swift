@@ -9,6 +9,8 @@ import UIKit
 
 final class RecentKeywordCell: UITableViewCell {
   
+  @IBOutlet weak var keywordLabel: UILabel!
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
