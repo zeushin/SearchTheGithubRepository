@@ -99,12 +99,9 @@
 		A51A8A8F2C9E859C00470AD3 /* SearchTheGithubRepository */ = {
 			isa = PBXGroup;
 			children = (
-				A51A8A902C9E859C00470AD3 /* AppDelegate.swift */,
-				A51A8A922C9E859C00470AD3 /* SceneDelegate.swift */,
-				A51A8A942C9E859C00470AD3 /* ViewController.swift */,
-				A51A8A962C9E859C00470AD3 /* Main.storyboard */,
-				A51A8A992C9E859D00470AD3 /* Assets.xcassets */,
-				A51A8A9B2C9E859D00470AD3 /* LaunchScreen.storyboard */,
+				A51A8AC02C9E89DD00470AD3 /* Presentation */,
+				A51A8AC12C9E8E5300470AD3 /* Domain */,
+				A51A8AC22C9E8E5C00470AD3 /* Data */,
 				A51A8A9E2C9E859D00470AD3 /* Info.plist */,
 			);
 			path = SearchTheGithubRepository;
@@ -125,6 +122,33 @@
 				A51A8AB32C9E859D00470AD3 /* SearchTheGithubRepositoryUITestsLaunchTests.swift */,
 			);
 			path = SearchTheGithubRepositoryUITests;
+			sourceTree = "<group>";
+		};
+		A51A8AC02C9E89DD00470AD3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A51A8A902C9E859C00470AD3 /* AppDelegate.swift */,
+				A51A8A922C9E859C00470AD3 /* SceneDelegate.swift */,
+				A51A8A962C9E859C00470AD3 /* Main.storyboard */,
+				A51A8A992C9E859D00470AD3 /* Assets.xcassets */,
+				A51A8A9B2C9E859D00470AD3 /* LaunchScreen.storyboard */,
+				A51A8A942C9E859C00470AD3 /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A51A8AC12C9E8E5300470AD3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		A51A8AC22C9E8E5C00470AD3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
