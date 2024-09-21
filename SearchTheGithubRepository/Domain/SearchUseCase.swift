@@ -10,6 +10,8 @@ import Foundation
 protocol SearchUseCase {
   var recentSearches: [Keyword] { get }
   func saveSearchText(_ text: String)
+  func deleteSearchText(_ text: String)
+  func deleteAllRecentSearches()
 }
 
 struct SearchUseCaseImpl: SearchUseCase {
@@ -34,6 +36,18 @@ struct SearchUseCaseImpl: SearchUseCase {
       searches.removeFirst()
     }
     syncRecentSearches(keywords: searches)
+  }
+  
+  func deleteSearchText(_ text: String) {
+    var searches = recentSearchesQueue
+    if let index = searches.firstIndex(where: { $0.text == text }) {
+      searches.remove(at: index)
+    }
+    syncRecentSearches(keywords: searches)
+  }
+  
+  func deleteAllRecentSearches() {
+    syncRecentSearches(keywords: [])
   }
   
 }

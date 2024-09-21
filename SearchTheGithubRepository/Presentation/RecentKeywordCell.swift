@@ -11,6 +11,8 @@ final class RecentKeywordCell: UITableViewCell {
   
   @IBOutlet weak var keywordLabel: UILabel!
   
+  var onDelete: (() -> Void)?
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
@@ -23,7 +25,7 @@ final class RecentKeywordCell: UITableViewCell {
   }
   
   @IBAction func deleteAction(_ sender: UIButton) {
-    
+    onDelete?()
   }
   
 }
