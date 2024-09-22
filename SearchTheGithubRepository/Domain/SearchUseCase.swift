@@ -17,12 +17,13 @@ protocol SearchUseCase {
 
 struct SearchUseCaseImpl: SearchUseCase {
   
-  let recentSearchRepository: RecentSearchRepository
-  let searchRepository: SearchRepository
+  private static let maxRecentSearch = 10
+  let recentSearchRepository: RecentSearchRepositoryProtocol
+  let searchRepository: SearchRepositoryProtocol
   
   init(
-    recentSearchRepository: RecentSearchRepository,
-    searchRepository: SearchRepository
+    recentSearchRepository: RecentSearchRepositoryProtocol,
+    searchRepository: SearchRepositoryProtocol
   ) {
     self.recentSearchRepository = recentSearchRepository
     self.searchRepository = searchRepository
@@ -38,7 +39,7 @@ struct SearchUseCaseImpl: SearchUseCase {
       searches.remove(at: index)
     }
     searches.append(Keyword(text: text, updated: .now))
-    if searches.count > 10 {
+    if searches.count > Self.maxRecentSearch {
       searches.removeFirst()
     }
     syncRecentSearches(keywords: searches)

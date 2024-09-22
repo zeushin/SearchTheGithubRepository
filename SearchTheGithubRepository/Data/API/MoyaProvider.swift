@@ -9,6 +9,7 @@ import Foundation
 import Moya
 
 extension MoyaProvider {
+  
   func requestAsync<T: Decodable>(_ target: Target, for type: T.Type) async throws -> T {
     return try await withCheckedThrowingContinuation { continuation in
       self.request(target) { result in
@@ -26,4 +27,5 @@ extension MoyaProvider {
       }
     }
   }
+  
 }

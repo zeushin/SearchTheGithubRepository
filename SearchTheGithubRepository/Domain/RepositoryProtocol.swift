@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol RecentSearchRepository {
+protocol RecentSearchRepositoryProtocol {
   func getRecentSearches() -> [Keyword]
   func setRecentSearches(keywords: [Keyword])
 }
 
-protocol SearchRepository {
+protocol SearchRepositoryProtocol {
   func getSearch(query: String, page: Int) async -> SearchResult
 }

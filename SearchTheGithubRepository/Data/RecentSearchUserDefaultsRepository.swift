@@ -1,5 +1,5 @@
 //
-//  RecentSearchRepository.swift
+//  RecentSearchUserDefaultsRepository.swift
 //  SearchTheGithubRepository
 //
 //  Created by Masher Shin on 9/21/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecentSearchUserDefaultsRepository: RecentSearchRepository {
+struct RecentSearchUserDefaultsRepository: RecentSearchRepositoryProtocol {
 
   func getRecentSearches() -> [Keyword] {
     guard let data = UserDefaults.standard.data(forKey: "RecentSearches"),

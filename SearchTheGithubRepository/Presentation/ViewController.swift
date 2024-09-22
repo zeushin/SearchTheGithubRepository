@@ -143,24 +143,12 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = UIView()
+    let title = viewModel.state.sectionHeader.title
+    let textColor = viewModel.state.sectionHeader.textColor
+    let headerView = HeaderView(title: title, textColor: textColor, margins: tableView.layoutMargins)
     headerView.backgroundColor = tableView.backgroundColor
-    
-    let headerLabel = UILabel()
-    let margins = tableView.layoutMargins
-    headerLabel.frame = CGRect(
-      x: margins.left, 
-      y: 0,
-      width: tableView.frame.width - (margins.left + margins.right),
-      height: 28
-    )
-    headerLabel.font = UIFont.boldSystemFont(ofSize: 14)
-    headerLabel.text = viewModel.state.sectionHeader.title
-    headerLabel.textColor = viewModel.state.sectionHeader.textColor
-    
-    headerView.addSubview(headerLabel)
-    
     return headerView
   }
   
@@ -190,6 +178,7 @@ extension ViewController: UITableViewDelegate {
     case .none:
       break
     }
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -7,9 +7,14 @@
 
 import UIKit
 
-class SearchResultCell: UITableViewCell {
+final class SearchResultCell: UITableViewCell {
 
-  @IBOutlet weak var thumbnailView: UIImageView!
+  @IBOutlet weak var thumbnailView: UIImageView! {
+    didSet {
+      thumbnailView.layer.cornerRadius = thumbnailView.bounds.width / 2
+      thumbnailView.layer.masksToBounds = true
+    }
+  }
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   

@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-struct GithubRepoSearchRepository: SearchRepository {
+struct GithubRepoSearchRepository: SearchRepositoryProtocol {
   
   private let provider: MoyaProvider<GitHubAPI>
   
@@ -38,4 +38,5 @@ struct GithubRepoSearchRepository: SearchRepository {
       return SearchResult(totalCount: 0, items: [])
     }
   }
+  
 }

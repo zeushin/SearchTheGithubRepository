@@ -54,13 +54,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift Swift Swift Swift Swift Swift Swift Swift Swift Swift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYC-cq-gxd">
-                                                    <rect key="frame" x="20" y="13" width="283.33333333333331" height="18"/>
+                                                    <rect key="frame" x="20" y="13" width="303" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJ4-fx-1RT">
-                                                    <rect key="frame" x="323.33333333333331" y="4.6666666666666679" width="49.666666666666686" height="35"/>
+                                                    <rect key="frame" x="323" y="0.0" width="50" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="pbr-WS-7Df"/>
+                                                        <constraint firstAttribute="height" constant="44" id="t0h-Th-g6F"/>
+                                                    </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain">
                                                         <imageReference key="image" image="xmark.circle.fill" catalog="system" renderingMode="hierarchical-single">
@@ -78,9 +82,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="UYC-cq-gxd" firstAttribute="leading" secondItem="RiJ-ud-VFD" secondAttribute="leadingMargin" id="3zZ-Va-xxS"/>
-                                                <constraint firstItem="UJ4-fx-1RT" firstAttribute="leading" secondItem="UYC-cq-gxd" secondAttribute="trailing" constant="20" id="Ru2-9r-Jql"/>
+                                                <constraint firstItem="UJ4-fx-1RT" firstAttribute="leading" secondItem="UYC-cq-gxd" secondAttribute="trailing" id="Ru2-9r-Jql"/>
                                                 <constraint firstItem="UYC-cq-gxd" firstAttribute="centerY" secondItem="RiJ-ud-VFD" secondAttribute="centerY" id="SAu-Xv-eMf"/>
+                                                <constraint firstItem="UJ4-fx-1RT" firstAttribute="top" secondItem="RiJ-ud-VFD" secondAttribute="top" id="ex5-q5-E0s"/>
                                                 <constraint firstItem="UJ4-fx-1RT" firstAttribute="centerY" secondItem="RiJ-ud-VFD" secondAttribute="centerY" id="iOL-Hw-dl6"/>
+                                                <constraint firstAttribute="bottom" secondItem="UJ4-fx-1RT" secondAttribute="bottom" id="tRI-BC-e7w"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="UJ4-fx-1RT" secondAttribute="trailing" id="voZ-nr-Xxo"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -127,27 +133,27 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PK-aW-b9a">
-                                                    <rect key="frame" x="72" y="40" width="301" height="15"/>
+                                                    <rect key="frame" x="84" y="38" width="289" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfy-Oz-Txw">
-                                                    <rect key="frame" x="72" y="11" width="301" height="21"/>
+                                                    <rect key="frame" x="84" y="13" width="289" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="8" symbolic="YES" id="05a-xK-sfk"/>
+                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="20" id="05a-xK-sfk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="1PK-aW-b9a" secondAttribute="trailing" id="F67-t7-cur"/>
                                                 <constraint firstItem="JD7-SC-3Ji" firstAttribute="leading" secondItem="zZ4-jY-jik" secondAttribute="leadingMargin" id="Lke-pQ-nNG"/>
                                                 <constraint firstItem="JD7-SC-3Ji" firstAttribute="top" secondItem="zZ4-jY-jik" secondAttribute="topMargin" id="N1t-3y-Zcf"/>
-                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="bottom" secondItem="zZ4-jY-jik" secondAttribute="bottomMargin" id="VaH-ma-BKH"/>
-                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="8" symbolic="YES" id="bN7-62-CN6"/>
+                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="bottom" secondItem="zZ4-jY-jik" secondAttribute="bottomMargin" constant="-2" id="VaH-ma-BKH"/>
+                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="20" id="bN7-62-CN6"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="JD7-SC-3Ji" secondAttribute="bottom" id="kaP-DC-KsD"/>
-                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="top" secondItem="zZ4-jY-jik" secondAttribute="topMargin" id="q6e-cB-21R"/>
+                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="top" secondItem="zZ4-jY-jik" secondAttribute="topMargin" constant="2" id="q6e-cB-21R"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cfy-Oz-Txw" secondAttribute="trailing" id="ywv-cx-08t"/>
                                             </constraints>
                                         </tableViewCellContentView>

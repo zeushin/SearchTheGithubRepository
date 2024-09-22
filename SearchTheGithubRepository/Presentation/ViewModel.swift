@@ -211,7 +211,6 @@ private extension ViewModel {
     state.currentPage = 1
     state.hasMorePages = true
   }
-  
 }
 
 extension Int {
