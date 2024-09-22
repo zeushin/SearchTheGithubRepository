@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 final class ViewController: UIViewController {
   
@@ -24,7 +25,8 @@ final class ViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView!
   private var viewModel = ViewModel(
     searchUseCase: SearchUseCaseImpl(
-      recentSearchRepository: RecentSearchRepositoryImpl()
+      recentSearchRepository: RecentSearchUserDefaultsRepository(),
+      searchRepository: GithubRepoSearchRepository()
     )
   )
   private var cancellables = Set<AnyCancellable>()
@@ -85,19 +87,6 @@ extension ViewController: UISearchBarDelegate {
 
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //    var idid = ""
-    //    switch indexPath.row {
-    //    case 0:
-    //      idid = "AutoCompletionCell"
-    //    case 1:
-    //      idid = "RecentKeywordCell"
-    //    case 2:
-    //      idid = "RemoveAllCell"
-    //    default:
-    //      idid = "AutoCompletionCell"
-    //    }
-    
-    
     let identifier: String = viewModel.state.cellIdentifier(for: indexPath)
     let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     
@@ -115,6 +104,12 @@ extension ViewController: UITableViewDataSource {
       if let keyword = viewModel.state.cellKeyword(for: indexPath) {
         cell.textLabel?.text = keyword.text
         cell.detailTextLabel?.text = keyword.displayDate
+      }
+    case .searchResultCell:
+      if let searchResult = viewModel.state.cellSearchReuslt(for: indexPath) {
+        (cell as? SearchResultCell)?.thumbnailView.kf.setImage(with: searchResult.thumbnail)
+        (cell as? SearchResultCell)?.titleLabel.text = searchResult.title
+        (cell as? SearchResultCell)?.descriptionLabel.text = searchResult.desscription
       }
     case .removeAllCell, .none:
       break

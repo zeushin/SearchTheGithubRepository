@@ -17,7 +17,8 @@ struct Keyword: Equatable {
   }
 }
 
-struct KeywordDTO: Codable {
-  let query: String
-  let updated: Date
+struct SearchResultItem {
+  let thumbnail: URL
+  let title: String
+  let desscription: String
 }

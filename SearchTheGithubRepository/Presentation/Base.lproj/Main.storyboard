@@ -112,6 +112,51 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="BTf-gD-eKT" customClass="SearchResultCell" customModule="SearchTheGithubRepository" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="182" width="393" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BTf-gD-eKT" id="zZ4-jY-jik">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JD7-SC-3Ji">
+                                                    <rect key="frame" x="20" y="11" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="e8d-xh-lcl"/>
+                                                        <constraint firstAttribute="height" constant="44" id="heH-nD-ODX"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PK-aW-b9a">
+                                                    <rect key="frame" x="72" y="40" width="301" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfy-Oz-Txw">
+                                                    <rect key="frame" x="72" y="11" width="301" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="8" symbolic="YES" id="05a-xK-sfk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1PK-aW-b9a" secondAttribute="trailing" id="F67-t7-cur"/>
+                                                <constraint firstItem="JD7-SC-3Ji" firstAttribute="leading" secondItem="zZ4-jY-jik" secondAttribute="leadingMargin" id="Lke-pQ-nNG"/>
+                                                <constraint firstItem="JD7-SC-3Ji" firstAttribute="top" secondItem="zZ4-jY-jik" secondAttribute="topMargin" id="N1t-3y-Zcf"/>
+                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="bottom" secondItem="zZ4-jY-jik" secondAttribute="bottomMargin" id="VaH-ma-BKH"/>
+                                                <constraint firstItem="1PK-aW-b9a" firstAttribute="leading" secondItem="JD7-SC-3Ji" secondAttribute="trailing" constant="8" symbolic="YES" id="bN7-62-CN6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JD7-SC-3Ji" secondAttribute="bottom" id="kaP-DC-KsD"/>
+                                                <constraint firstItem="cfy-Oz-Txw" firstAttribute="top" secondItem="zZ4-jY-jik" secondAttribute="topMargin" id="q6e-cB-21R"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cfy-Oz-Txw" secondAttribute="trailing" id="ywv-cx-08t"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="1PK-aW-b9a" id="ITv-IG-oAx"/>
+                                            <outlet property="thumbnailView" destination="JD7-SC-3Ji" id="8mf-lg-ecd"/>
+                                            <outlet property="titleLabel" destination="cfy-Oz-Txw" id="rCa-zb-x8h"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="yhr-2e-REG"/>

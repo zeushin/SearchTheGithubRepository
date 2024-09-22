@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class ViewModel {
   
@@ -14,6 +13,7 @@ final class ViewModel {
     case recentKeywordCell = "RecentKeywordCell"
     case removeAllCell = "RemoveAllCell"
     case suggestionCell = "SuggestionCell"
+    case searchResultCell = "SearchResultCell"
   }
   
   enum Action {
@@ -24,22 +24,30 @@ final class ViewModel {
   }
   
   struct State {
-    var searchResults: [Keyword] = []
+    var searchResults: [SearchResultItem] = []
     var recentSearches: [Keyword] = []
     var suggestions: [Keyword] = []
     var isActive: Bool = false
     
     var numberOfRows: Int {
-      isActive ? suggestions.count : recentSearches.count + 1
+      guard isActive else {
+        return recentSearches.count + 1
+      }
+      guard searchResults.isEmpty == false else {
+        return suggestions.count
+      }
+      return searchResults.count
     }
     
     func cellIdentifier(for indexPath: IndexPath) -> String {
       func cellIdentifier(for indexPath: IndexPath) -> CellType {
-        if isActive {
-          return .suggestionCell
-        } else {
+        guard isActive else {
           return indexPath.row < recentSearches.count ? .recentKeywordCell : .removeAllCell
         }
+        guard searchResults.isEmpty == false else {
+          return .suggestionCell
+        }
+        return .searchResultCell
       }
       return cellIdentifier(for: indexPath).rawValue
     }
@@ -52,6 +60,11 @@ final class ViewModel {
       } else {
         return nil
       }
+    }
+    
+    func cellSearchReuslt(for indexPath: IndexPath) -> SearchResultItem? {
+      guard isActive, searchResults.count > indexPath.row else { return nil }
+      return searchResults[indexPath.row]
     }
   }
   
@@ -67,6 +80,7 @@ final class ViewModel {
     switch action {
     case .searchButtonTapped(let text):
       saveRecentSearch(text: text)
+      await requestSearch(text: text)
     case .deleteButtonTapped(let text):
       deleteRecentSearch(text: text)
     case .removeAllButtonTapped:
@@ -109,6 +123,10 @@ private extension ViewModel {
       let normalizedText = text.lowercased().trimmingCharacters(in: .whitespaces)
       return normalizedKeyword.contains(normalizedText)
     }
+  }
+  
+  func requestSearch(text: String) async {
+    state.searchResults = await useCase.requestSearch(text)
   }
   
 }

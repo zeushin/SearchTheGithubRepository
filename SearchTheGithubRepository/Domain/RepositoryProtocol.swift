@@ -8,10 +8,10 @@
 import Foundation
 
 protocol RecentSearchRepository {
-  func getRecentSearches() -> [KeywordDTO]
-  func setRecentSearches(keywords: [KeywordDTO])
+  func getRecentSearches() -> [Keyword]
+  func setRecentSearches(keywords: [Keyword])
 }
 
 protocol SearchRepository {
-  
+  func getSearch(query: String) async -> [SearchResultItem]
 }

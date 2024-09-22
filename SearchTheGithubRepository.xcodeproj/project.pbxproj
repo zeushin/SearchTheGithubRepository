@@ -25,6 +25,9 @@
 		A51A8AD72C9EFBD600470AD3 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD62C9EFBD600470AD3 /* SearchUseCase.swift */; };
 		A51A8AD92C9F08C800470AD3 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AD82C9F08C800470AD3 /* RepositoryProtocol.swift */; };
 		A51A8ADB2C9F096400470AD3 /* RecentSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */; };
+		A51A8ADD2C9FFDB600470AD3 /* KeywordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ADC2C9FFDB600470AD3 /* KeywordDTO.swift */; };
+		A51A8ADF2C9FFEE700470AD3 /* GithubRepoSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8ADE2C9FFEE700470AD3 /* GithubRepoSearchRepository.swift */; };
+		A51A8AE12CA00E3000470AD3 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A8AE02CA00E3000470AD3 /* SearchResultCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		A51A8AD62C9EFBD600470AD3 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		A51A8AD82C9F08C800470AD3 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
 		A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchRepository.swift; sourceTree = "<group>"; };
+		A51A8ADC2C9FFDB600470AD3 /* KeywordDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordDTO.swift; sourceTree = "<group>"; };
+		A51A8ADE2C9FFEE700470AD3 /* GithubRepoSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepoSearchRepository.swift; sourceTree = "<group>"; };
+		A51A8AE02CA00E3000470AD3 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,7 @@
 				A51A8AD22C9EB93F00470AD3 /* ViewModel.swift */,
 				A51A8ACC2C9EA65900470AD3 /* RemoveAllCell.swift */,
 				A51A8AD02C9EA8DC00470AD3 /* RecentKeywordCell.swift */,
+				A51A8AE02CA00E3000470AD3 /* SearchResultCell.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -172,6 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				A51A8ADA2C9F096400470AD3 /* RecentSearchRepository.swift */,
+				A51A8ADE2C9FFEE700470AD3 /* GithubRepoSearchRepository.swift */,
+				A51A8ADC2C9FFDB600470AD3 /* KeywordDTO.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -315,11 +324,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51A8ADF2C9FFEE700470AD3 /* GithubRepoSearchRepository.swift in Sources */,
 				A51A8ADB2C9F096400470AD3 /* RecentSearchRepository.swift in Sources */,
 				A51A8AD52C9EC17E00470AD3 /* Keyword.swift in Sources */,
 				A51A8A952C9E859C00470AD3 /* ViewController.swift in Sources */,
+				A51A8AE12CA00E3000470AD3 /* SearchResultCell.swift in Sources */,
 				A51A8ACD2C9EA65900470AD3 /* RemoveAllCell.swift in Sources */,
 				A51A8AD12C9EA8DC00470AD3 /* RecentKeywordCell.swift in Sources */,
+				A51A8ADD2C9FFDB600470AD3 /* KeywordDTO.swift in Sources */,
 				A51A8A912C9E859C00470AD3 /* AppDelegate.swift in Sources */,
 				A51A8AD72C9EFBD600470AD3 /* SearchUseCase.swift in Sources */,
 				A51A8AD32C9EB93F00470AD3 /* ViewModel.swift in Sources */,

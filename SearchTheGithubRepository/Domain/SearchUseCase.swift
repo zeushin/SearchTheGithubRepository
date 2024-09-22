@@ -12,14 +12,20 @@ protocol SearchUseCase {
   func saveSearchText(_ text: String)
   func deleteSearchText(_ text: String)
   func deleteAllRecentSearches()
+  func requestSearch(_ text: String) async -> [SearchResultItem]
 }
 
 struct SearchUseCaseImpl: SearchUseCase {
   
   let recentSearchRepository: RecentSearchRepository
+  let searchRepository: SearchRepository
   
-  init(recentSearchRepository: RecentSearchRepository) {
+  init(
+    recentSearchRepository: RecentSearchRepository,
+    searchRepository: SearchRepository
+  ) {
     self.recentSearchRepository = recentSearchRepository
+    self.searchRepository = searchRepository
   }
   
   var recentSearches: [Keyword] {
@@ -50,20 +56,20 @@ struct SearchUseCaseImpl: SearchUseCase {
     syncRecentSearches(keywords: [])
   }
   
+  func requestSearch(_ text: String) async -> [SearchResultItem] {
+    await searchRepository.getSearch(query: text)
+  }
+  
 }
 
 private extension SearchUseCaseImpl {
   
   var recentSearchesQueue: [Keyword] {
-    recentSearchRepository
-      .getRecentSearches()
-      .map { Keyword(text: $0.query, updated: $0.updated) }
+    recentSearchRepository.getRecentSearches()
   }
   
   func syncRecentSearches(keywords: [Keyword]) {
-    recentSearchRepository.setRecentSearches(
-      keywords: keywords.map { KeywordDTO(query: $0.text, updated: $0.updated) }
-    )
+    recentSearchRepository.setRecentSearches(keywords: keywords)
   }
   
 }
