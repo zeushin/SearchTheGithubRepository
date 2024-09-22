@@ -37,7 +37,7 @@ final class ViewModel {
     fileprivate var recentSearches: [Keyword] = []
     fileprivate var suggestions: [Keyword] = []
     fileprivate var currentPage: Int = 1
-    fileprivate var isLoading: Bool = false
+    fileprivate(set) var isLoading: Bool = false
     fileprivate var hasMorePages: Bool = true
     fileprivate var searchState: SearchState = .idle
     
@@ -163,7 +163,7 @@ private extension ViewModel {
     }
     
     guard state.searchedText.isEmpty else { return }
-
+    
     if (text ?? "").isEmpty {
       state.searchState = .idle
     } else {
@@ -185,11 +185,9 @@ private extension ViewModel {
   
   func requestSearch(text: String) async {
     state.isLoading = true
-    defer {
-      state.isLoading = false
-    }
-    
     let result = await useCase.requestSearch(text, page: state.currentPage)
+    state.isLoading = false
+    
     if state.currentPage == 1 {
       state.searchResult = result
     } else {

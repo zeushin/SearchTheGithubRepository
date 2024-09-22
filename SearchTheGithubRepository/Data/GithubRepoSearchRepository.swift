@@ -13,7 +13,7 @@ struct GithubRepoSearchRepository: SearchRepository {
   private let provider: MoyaProvider<GitHubAPI>
   
   init() {
-      self.provider = MoyaProvider()
+    self.provider = MoyaProvider()
   }
   
   func getSearch(query: String, page: Int) async -> SearchResult {
@@ -22,6 +22,7 @@ struct GithubRepoSearchRepository: SearchRepository {
         .getRepositories(query: query, page: page),
         for: GitHubRepoDTO.self
       )
+      
       return SearchResult(
         totalCount: dto.total_count,
         items: dto.items.map {

@@ -48,11 +48,33 @@ private extension ViewController {
         self?.tableView.reloadData()
       }
       .store(in: &cancellables)
+    
+    viewModel.$state
+      .receive(on: RunLoop.main)
+      .map(\.isLoading)
+      .removeDuplicates()
+      .sink { [weak self] _ in
+        self?.updateLoadingIndicator()
+      }
+      .store(in: &cancellables)
   }
 
   func setupSearchBar() {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
+  }
+  
+  func updateLoadingIndicator() {
+    guard viewModel.state.isLoading else {
+      tableView.tableFooterView = nil
+      return
+    }
+    guard tableView.tableFooterView == nil else { return }
+    
+    let footerActivityIndicator = UIActivityIndicatorView(style: .medium)
+    footerActivityIndicator.startAnimating()
+    footerActivityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
+    tableView.tableFooterView = footerActivityIndicator
   }
 }
 
@@ -64,11 +86,9 @@ extension ViewController: UISearchResultsUpdating {
       )
     }
   }
-  
 }
 
 extension ViewController: UISearchBarDelegate {
-  
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     searchController.searchBar.setShowsCancelButton(true, animated: true)
   }
@@ -118,13 +138,11 @@ extension ViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.state.numberOfRows
+    viewModel.state.numberOfRows
   }
-  
 }
 
 extension ViewController: UITableViewDelegate {
-  
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = UIView()
     headerView.backgroundColor = tableView.backgroundColor
@@ -147,7 +165,7 @@ extension ViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return viewModel.state.sectionHeader.height
+    viewModel.state.sectionHeader.height
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -177,12 +195,10 @@ extension ViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     let totalRows = viewModel.state.numberOfRows
     let thresholdIndex = totalRows - 5
-    
     if indexPath.row == thresholdIndex {
       Task {
         await viewModel.send(.loadNextPage)
       }
     }
   }
-  
 }
