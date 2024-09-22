@@ -6,15 +6,30 @@
 //
 
 import Foundation
+import Moya
 
 struct GithubRepoSearchRepository: SearchRepository {
-  func getSearch(query: String) async -> [SearchResultItem] {
-    return [ // fix dummy
-      SearchResultItem(
-        thumbnail: URL(string: "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/swift/swift.png?size=48")!,
-        title: "hoho",
-        desscription: "helllllow"
-      )
-    ]
+  
+  private let provider: MoyaProvider<GitHubAPI>
+  
+  init() {
+      self.provider = MoyaProvider()
+  }
+  
+  func getSearch(query: String, page: Int) async -> [SearchResultItem] {
+    do {
+      return try await provider.requestAsync(
+        .getRepositories(query: query, page: page),
+        for: GitHubRepoDTO.self
+      ).items.map {
+        SearchResultItem(
+          thumbnail: URL(string: $0.owner.avatar_url ?? ""),
+          title: $0.name,
+          desscription: $0.owner.login
+        )
+      }
+    } catch {
+      return []
+    }
   }
 }

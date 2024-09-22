@@ -18,7 +18,7 @@ struct Keyword: Equatable {
 }
 
 struct SearchResultItem {
-  let thumbnail: URL
+  let thumbnail: URL?
   let title: String
   let desscription: String
 }

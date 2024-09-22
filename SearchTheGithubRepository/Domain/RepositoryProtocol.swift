@@ -13,5 +13,5 @@ protocol RecentSearchRepository {
 }
 
 protocol SearchRepository {
-  func getSearch(query: String) async -> [SearchResultItem]
+  func getSearch(query: String, page: Int) async -> [SearchResultItem]
 }

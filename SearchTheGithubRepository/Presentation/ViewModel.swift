@@ -126,7 +126,7 @@ private extension ViewModel {
   }
   
   func requestSearch(text: String) async {
-    state.searchResults = await useCase.requestSearch(text)
+    state.searchResults = await useCase.requestSearch(text, page: 0)
   }
   
 }

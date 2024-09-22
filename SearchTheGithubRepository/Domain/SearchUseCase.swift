@@ -12,7 +12,7 @@ protocol SearchUseCase {
   func saveSearchText(_ text: String)
   func deleteSearchText(_ text: String)
   func deleteAllRecentSearches()
-  func requestSearch(_ text: String) async -> [SearchResultItem]
+  func requestSearch(_ text: String, page: Int) async -> [SearchResultItem]
 }
 
 struct SearchUseCaseImpl: SearchUseCase {
@@ -56,8 +56,8 @@ struct SearchUseCaseImpl: SearchUseCase {
     syncRecentSearches(keywords: [])
   }
   
-  func requestSearch(_ text: String) async -> [SearchResultItem] {
-    await searchRepository.getSearch(query: text)
+  func requestSearch(_ text: String, page: Int) async -> [SearchResultItem] {
+    await searchRepository.getSearch(query: text, page: page)
   }
   
 }
