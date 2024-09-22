@@ -8,28 +8,28 @@
 import Foundation
 
 struct GitHubRepoDTO: Decodable {
-    let total_count: Int
-    let items: [GitHubRepoItemDto]
+  let total_count: Int
+  let items: [GitHubRepoItemDto]
 }
 
 extension GitHubRepoDTO {
-    struct GitHubRepoItemDto: Decodable {
-        let id: Int
-        let name: String
-        let owner: GitHubRepoOwnerDto
-        let html_url: String
-        let description: String?
-        let license: GitHubRepoLicenseDto?
-        let stargazers_count: Int
-    }
-
-    struct GitHubRepoOwnerDto: Decodable {
-        let login: String
-        let avatar_url: String?
-        let html_url: String
-    }
-
-    struct GitHubRepoLicenseDto: Decodable {
-        let spdx_id: String
-    }
+  struct GitHubRepoItemDto: Decodable {
+    let id: Int
+    let name: String
+    let owner: GitHubRepoOwnerDto
+    let html_url: String
+    let description: String?
+    let license: GitHubRepoLicenseDto?
+    let stargazers_count: Int
+  }
+  
+  struct GitHubRepoOwnerDto: Decodable {
+    let login: String
+    let avatar_url: String?
+    let html_url: String
+  }
+  
+  struct GitHubRepoLicenseDto: Decodable {
+    let spdx_id: String
+  }
 }

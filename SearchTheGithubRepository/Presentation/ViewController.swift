@@ -138,8 +138,8 @@ extension ViewController: UITableViewDelegate {
       height: 28
     )
     headerLabel.font = UIFont.boldSystemFont(ofSize: 14)
-    headerLabel.text = viewModel.state.sectionHeader().title
-    headerLabel.textColor = viewModel.state.sectionHeader().textColor
+    headerLabel.text = viewModel.state.sectionHeader.title
+    headerLabel.textColor = viewModel.state.sectionHeader.textColor
     
     headerView.addSubview(headerLabel)
     
@@ -147,7 +147,7 @@ extension ViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return viewModel.state.sectionHeader().height
+    return viewModel.state.sectionHeader.height
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -171,6 +171,17 @@ extension ViewController: UITableViewDelegate {
       }
     case .none:
       break
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    let totalRows = viewModel.state.numberOfRows
+    let thresholdIndex = totalRows - 5
+    
+    if indexPath.row == thresholdIndex {
+      Task {
+        await viewModel.send(.loadNextPage)
+      }
     }
   }
   

@@ -10,6 +10,9 @@ import Foundation
 struct SearchResult {
   let totalCount: Int
   let items: [SearchResultItem]
+  var hasMorePages: Bool {
+    totalCount > items.count
+  }
 }
 
 struct SearchResultItem {

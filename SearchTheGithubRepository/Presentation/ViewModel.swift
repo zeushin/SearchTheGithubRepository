@@ -28,6 +28,7 @@ final class ViewModel {
     case deleteButtonTapped(String)
     case removeAllButtonTapped
     case searchTextChanged(String?)
+    case loadNextPage
   }
   
   struct State {
@@ -35,6 +36,9 @@ final class ViewModel {
     fileprivate var searchResult: SearchResult?
     fileprivate var recentSearches: [Keyword] = []
     fileprivate var suggestions: [Keyword] = []
+    fileprivate var currentPage: Int = 1
+    fileprivate var isLoading: Bool = false
+    fileprivate var hasMorePages: Bool = true
     fileprivate var searchState: SearchState = .idle
     
     var numberOfRows: Int {
@@ -82,7 +86,7 @@ final class ViewModel {
       return searchResults[indexPath.row]
     }
     
-    func sectionHeader() -> (title: String, height: CGFloat, textColor: UIColor?) {
+    var sectionHeader: (title: String, height: CGFloat, textColor: UIColor?) {
       switch searchState {
       case .idle:
         return (
@@ -114,6 +118,7 @@ final class ViewModel {
     switch action {
     case .searchButtonTapped(let text):
       saveRecentSearch(text: text)
+      resetPagination()
       await requestSearch(text: text)
     case .deleteButtonTapped(let text):
       deleteRecentSearch(text: text)
@@ -122,6 +127,8 @@ final class ViewModel {
     case .searchTextChanged(let text):
       updateSearchState(with: text)
       updateSuggestions(for: text)
+    case .loadNextPage:
+      await loadNextPage()
     }
   }
 }
@@ -177,7 +184,34 @@ private extension ViewModel {
   }
   
   func requestSearch(text: String) async {
-    state.searchResult = await useCase.requestSearch(text, page: 0)
+    state.isLoading = true
+    defer {
+      state.isLoading = false
+    }
+    
+    let result = await useCase.requestSearch(text, page: state.currentPage)
+    if state.currentPage == 1 {
+      state.searchResult = result
+    } else {
+      state.searchResult = SearchResult(
+        totalCount: result.totalCount,
+        items: (state.searchResult?.items ?? []) + result.items
+      )
+    }
+    state.hasMorePages = state.searchResult?.hasMorePages ?? false
+  }
+  
+  func loadNextPage() async {
+    guard state.searchState == .result &&
+            state.isLoading == false &&
+            state.hasMorePages else { return }
+    state.currentPage += 1
+    await requestSearch(text: state.searchedText)
+  }
+  
+  func resetPagination() {
+    state.currentPage = 1
+    state.hasMorePages = true
   }
   
 }
