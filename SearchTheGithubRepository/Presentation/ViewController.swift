@@ -130,12 +130,22 @@ extension ViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    switch viewModel.state.cellIdentifier(for: indexPath) {
-    case "RemoveAllCell":
+    let identifier = viewModel.state.cellIdentifier(for: indexPath)
+    switch ViewModel.CellType(rawValue: identifier) {
+    case .removeAllCell:
       Task {
         await viewModel.send(.removeAllButtonTapped)
       }
-    default:
+    case .recentKeywordCell, .suggestionCell:
+      if let keyword = viewModel.state.cellKeyword(for: indexPath) {
+        searchController.isActive = true
+        searchController.searchBar.text = keyword.text
+        searchBarSearchButtonClicked(searchController.searchBar)
+      }
+    case .searchResultCell:
+      // TODO: web view
+      break
+    case .none:
       break
     }
   }
