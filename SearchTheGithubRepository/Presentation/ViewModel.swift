@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class ViewModel {
   
@@ -31,7 +32,7 @@ final class ViewModel {
   
   struct State {
     fileprivate var searchedText: String = ""
-    fileprivate var searchResults: [SearchResultItem] = []
+    fileprivate var searchResult: SearchResult?
     fileprivate var recentSearches: [Keyword] = []
     fileprivate var suggestions: [Keyword] = []
     fileprivate var searchState: SearchState = .idle
@@ -43,7 +44,7 @@ final class ViewModel {
       case .typing:
         return suggestions.count
       case .result:
-        return searchResults.count
+        return searchResult?.items.count ?? 0
       }
     }
     
@@ -74,10 +75,30 @@ final class ViewModel {
     
     func cellSearchReuslt(for indexPath: IndexPath) -> SearchResultItem? {
       guard case .result = searchState,
+            let searchResults = searchResult?.items,
             searchResults.count > indexPath.row else {
         return nil
       }
       return searchResults[indexPath.row]
+    }
+    
+    func sectionHeader() -> (title: String, height: CGFloat, textColor: UIColor?) {
+      switch searchState {
+      case .idle:
+        return (
+          "최근 검색",
+          28.0,
+          UIColor { $0.userInterfaceStyle == .dark ? .lightText : .darkText }
+        )
+      case .typing:
+        return ("", 0, nil)
+      case .result:
+        return (
+          "\(searchResult?.totalCount.decimal ?? "0")개 저장소",
+          28.0,
+          UIColor { $0.userInterfaceStyle == .dark ? .lightGray : .darkGray }
+        )
+      }
     }
   }
   
@@ -131,7 +152,7 @@ private extension ViewModel {
   func updateSearchState(with text: String?) {
     if state.searchedText != text {
       state.searchedText = ""
-      state.searchResults = []
+      state.searchResult = nil
     }
     
     guard state.searchedText.isEmpty else { return }
@@ -156,7 +177,16 @@ private extension ViewModel {
   }
   
   func requestSearch(text: String) async {
-    state.searchResults = await useCase.requestSearch(text, page: 0)
+    state.searchResult = await useCase.requestSearch(text, page: 0)
   }
   
+}
+
+extension Int {
+  var decimal: String? {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.locale = Locale.current
+    return formatter.string(from: NSNumber(value: self))
+  }
 }

@@ -16,9 +16,3 @@ struct Keyword: Equatable {
     return dateFormatter.string(from: updated)
   }
 }
-
-struct SearchResultItem {
-  let thumbnail: URL?
-  let title: String
-  let desscription: String
-}

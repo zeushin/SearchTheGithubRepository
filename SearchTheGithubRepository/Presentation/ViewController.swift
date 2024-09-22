@@ -123,9 +123,30 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
-
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "최근 검색" // TODO: font변경
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerView = UIView()
+    headerView.backgroundColor = tableView.backgroundColor
+    
+    let headerLabel = UILabel()
+    let margins = tableView.layoutMargins
+    headerLabel.frame = CGRect(
+      x: margins.left, 
+      y: 0,
+      width: tableView.frame.width - (margins.left + margins.right),
+      height: 28
+    )
+    headerLabel.font = UIFont.boldSystemFont(ofSize: 14)
+    headerLabel.text = viewModel.state.sectionHeader().title
+    headerLabel.textColor = viewModel.state.sectionHeader().textColor
+    
+    headerView.addSubview(headerLabel)
+    
+    return headerView
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return viewModel.state.sectionHeader().height
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
