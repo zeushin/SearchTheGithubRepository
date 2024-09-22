@@ -31,11 +31,8 @@ final class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    
     bindViewModel()
     setupSearchBar()
-    setupSearchBarObserver()
   }
   
 }
@@ -50,17 +47,7 @@ private extension ViewController {
       }
       .store(in: &cancellables)
   }
-  
-  func setupSearchBarObserver() {
-    searchController.searchBar
-      .publisher(for: \.text)
-      .compactMap { $0 }
-      .sink { [weak self] text in
-        print(text) // TODO: send to view model
-      }
-      .store(in: &cancellables)
-  }
-  
+
   func setupSearchBar() {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
@@ -69,7 +56,11 @@ private extension ViewController {
 
 extension ViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
-    print(":::::", searchController.isActive)
+    Task {
+      await viewModel.send(
+        .searchTextChanged(searchController.searchBar.text, searchController.isActive)
+      )
+    }
   }
   
 }
@@ -105,17 +96,28 @@ extension ViewController: UITableViewDataSource {
     //    default:
     //      idid = "AutoCompletionCell"
     //    }
-    let cell = tableView.dequeueReusableCell(
-      withIdentifier: viewModel.state.cellIdentifier(for: indexPath),
-      for: indexPath
-    )
-    if let text = viewModel.state.cellKeyword(for: indexPath)?.text {
-      (cell as? RecentKeywordCell)?.keywordLabel.text = text
-      (cell as? RecentKeywordCell)?.onDelete = { [weak self] in
-        Task {
-          await self?.viewModel.send(.deleteButtonTapped(text))
+    
+    
+    let identifier: String = viewModel.state.cellIdentifier(for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+    
+    switch ViewModel.CellType(rawValue: identifier) {
+    case .recentKeywordCell:
+      if let text = viewModel.state.cellKeyword(for: indexPath)?.text {
+        (cell as? RecentKeywordCell)?.keywordLabel.text = text
+        (cell as? RecentKeywordCell)?.onDelete = { [weak self] in
+          Task {
+            await self?.viewModel.send(.deleteButtonTapped(text))
+          }
         }
       }
+    case .suggestionCell:
+      if let keyword = viewModel.state.cellKeyword(for: indexPath) {
+        cell.textLabel?.text = keyword.text
+        cell.detailTextLabel?.text = keyword.displayDate
+      }
+    case .removeAllCell, .none:
+      break
     }
     return cell
   }

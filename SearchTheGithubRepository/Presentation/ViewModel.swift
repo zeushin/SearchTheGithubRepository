@@ -10,33 +10,48 @@ import Combine
 
 final class ViewModel {
   
+  enum CellType: String {
+    case recentKeywordCell = "RecentKeywordCell"
+    case removeAllCell = "RemoveAllCell"
+    case suggestionCell = "SuggestionCell"
+  }
+  
   enum Action {
     case searchButtonTapped(String)
     case deleteButtonTapped(String)
     case removeAllButtonTapped
+    case searchTextChanged(String?, Bool)
   }
   
   struct State {
-    var searchText: String = ""
     var searchResults: [Keyword] = []
     var recentSearches: [Keyword] = []
     var suggestions: [Keyword] = []
+    var isActive: Bool = false
     
     var numberOfRows: Int {
-      recentSearches.count + 1
+      isActive ? suggestions.count : recentSearches.count + 1
     }
     
     func cellIdentifier(for indexPath: IndexPath) -> String {
-      if indexPath.row < recentSearches.count {
-        return "RecentKeywordCell"
-      } else {
-        return "RemoveAllCell"
+      func cellIdentifier(for indexPath: IndexPath) -> CellType {
+        if isActive {
+          return .suggestionCell
+        } else {
+          return indexPath.row < recentSearches.count ? .recentKeywordCell : .removeAllCell
+        }
       }
+      return cellIdentifier(for: indexPath).rawValue
     }
     
     func cellKeyword(for indexPath: IndexPath) -> Keyword? {
-      guard indexPath.row < recentSearches.count else { return nil }
-      return recentSearches[indexPath.row]
+      if isActive {
+        return suggestions[indexPath.row]
+      } else if indexPath.row < recentSearches.count {
+        return recentSearches[indexPath.row]
+      } else {
+        return nil
+      }
     }
   }
   
@@ -56,6 +71,8 @@ final class ViewModel {
       deleteRecentSearch(text: text)
     case .removeAllButtonTapped:
       removeAllRecentSearches()
+    case .searchTextChanged(let text, let isActive):
+      updateSuggestions(for: text, isActive)
     }
   }
 }
@@ -79,6 +96,19 @@ private extension ViewModel {
   func removeAllRecentSearches() {
     useCase.deleteAllRecentSearches()
     state.recentSearches = useCase.recentSearches
+  }
+  
+  func updateSuggestions(for text: String?, _ isActive: Bool) {
+    state.isActive = isActive
+    guard let text else {
+      state.suggestions = []
+      return
+    }
+    state.suggestions = state.recentSearches.filter { keyword in
+      let normalizedKeyword = keyword.text.lowercased().trimmingCharacters(in: .whitespaces)
+      let normalizedText = text.lowercased().trimmingCharacters(in: .whitespaces)
+      return normalizedKeyword.contains(normalizedText)
+    }
   }
   
 }

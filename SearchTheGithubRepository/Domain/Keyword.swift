@@ -10,6 +10,11 @@ import Foundation
 struct Keyword: Equatable {
   let text: String
   let updated: Date
+  var displayDate: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM. dd."
+    return dateFormatter.string(from: updated)
+  }
 }
 
 struct KeywordDTO: Codable {
