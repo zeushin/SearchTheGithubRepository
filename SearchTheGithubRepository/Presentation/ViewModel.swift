@@ -16,54 +16,67 @@ final class ViewModel {
     case searchResultCell = "SearchResultCell"
   }
   
+  enum SearchState {
+    case idle
+    case typing
+    case result
+  }
+  
   enum Action {
     case searchButtonTapped(String)
     case deleteButtonTapped(String)
     case removeAllButtonTapped
-    case searchTextChanged(String?, Bool)
+    case searchTextChanged(String?)
   }
   
   struct State {
-    var searchResults: [SearchResultItem] = []
-    var recentSearches: [Keyword] = []
-    var suggestions: [Keyword] = []
-    var isActive: Bool = false
+    fileprivate var searchedText: String = ""
+    fileprivate var searchResults: [SearchResultItem] = []
+    fileprivate var recentSearches: [Keyword] = []
+    fileprivate var suggestions: [Keyword] = []
+    fileprivate var searchState: SearchState = .idle
     
     var numberOfRows: Int {
-      guard isActive else {
+      switch searchState {
+      case .idle:
         return recentSearches.count + 1
-      }
-      guard searchResults.isEmpty == false else {
+      case .typing:
         return suggestions.count
+      case .result:
+        return searchResults.count
       }
-      return searchResults.count
     }
     
     func cellIdentifier(for indexPath: IndexPath) -> String {
       func cellIdentifier(for indexPath: IndexPath) -> CellType {
-        guard isActive else {
+        switch searchState {
+        case .idle:
           return indexPath.row < recentSearches.count ? .recentKeywordCell : .removeAllCell
-        }
-        guard searchResults.isEmpty == false else {
+        case .typing:
           return .suggestionCell
+        case .result:
+          return .searchResultCell
         }
-        return .searchResultCell
       }
       return cellIdentifier(for: indexPath).rawValue
     }
     
     func cellKeyword(for indexPath: IndexPath) -> Keyword? {
-      if isActive {
-        return suggestions[indexPath.row]
-      } else if indexPath.row < recentSearches.count {
+      switch searchState {
+      case .idle:
         return recentSearches[indexPath.row]
-      } else {
+      case .typing:
+        return suggestions[indexPath.row]
+      case .result:
         return nil
       }
     }
     
     func cellSearchReuslt(for indexPath: IndexPath) -> SearchResultItem? {
-      guard isActive, searchResults.count > indexPath.row else { return nil }
+      guard case .result = searchState,
+            searchResults.count > indexPath.row else {
+        return nil
+      }
       return searchResults[indexPath.row]
     }
   }
@@ -85,8 +98,9 @@ final class ViewModel {
       deleteRecentSearch(text: text)
     case .removeAllButtonTapped:
       removeAllRecentSearches()
-    case .searchTextChanged(let text, let isActive):
-      updateSuggestions(for: text, isActive)
+    case .searchTextChanged(let text):
+      updateSearchState(with: text)
+      updateSuggestions(for: text)
     }
   }
 }
@@ -100,6 +114,8 @@ private extension ViewModel {
   func saveRecentSearch(text: String) {
     useCase.saveSearchText(text)
     state.recentSearches = useCase.recentSearches
+    state.searchedText = text
+    state.searchState = .result
   }
   
   func deleteRecentSearch(text: String) {
@@ -112,8 +128,22 @@ private extension ViewModel {
     state.recentSearches = useCase.recentSearches
   }
   
-  func updateSuggestions(for text: String?, _ isActive: Bool) {
-    state.isActive = isActive
+  func updateSearchState(with text: String?) {
+    if state.searchedText != text {
+      state.searchedText = ""
+      state.searchResults = []
+    }
+    
+    guard state.searchedText.isEmpty else { return }
+
+    if (text ?? "").isEmpty {
+      state.searchState = .idle
+    } else {
+      state.searchState = .typing
+    }
+  }
+  
+  func updateSuggestions(for text: String?) {
     guard let text else {
       state.suggestions = []
       return

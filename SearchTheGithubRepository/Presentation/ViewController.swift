@@ -59,7 +59,7 @@ extension ViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     Task {
       await viewModel.send(
-        .searchTextChanged(searchController.searchBar.text, searchController.isActive)
+        .searchTextChanged(searchController.searchBar.text)
       )
     }
   }
