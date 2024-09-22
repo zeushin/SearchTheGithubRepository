@@ -86,7 +86,9 @@ extension ViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     guard let text = searchBar.text else { return }
-    viewModel.send(.searchButtonTapped(text))
+    Task {
+      await viewModel.send(.searchButtonTapped(text))
+    }
   }
 }
 
@@ -110,7 +112,9 @@ extension ViewController: UITableViewDataSource {
     if let text = viewModel.state.cellKeyword(for: indexPath)?.text {
       (cell as? RecentKeywordCell)?.keywordLabel.text = text
       (cell as? RecentKeywordCell)?.onDelete = { [weak self] in
-        self?.viewModel.send(.deleteButtonTapped(text))
+        Task {
+          await self?.viewModel.send(.deleteButtonTapped(text))
+        }
       }
     }
     return cell
@@ -131,7 +135,9 @@ extension ViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch viewModel.state.cellIdentifier(for: indexPath) {
     case "RemoveAllCell":
-      viewModel.send(.removeAllButtonTapped)
+      Task {
+        await viewModel.send(.removeAllButtonTapped)
+      }
     default:
       break
     }

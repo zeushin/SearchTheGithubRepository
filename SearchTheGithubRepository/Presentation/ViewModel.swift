@@ -41,72 +41,44 @@ final class ViewModel {
   }
   
   @Published private(set) var state = State()
-  private var cancellables = Set<AnyCancellable>()
-  private let actionSubject = PassthroughSubject<Action, Never>()
   private let useCase: SearchUseCase
   
   init(searchUseCase: SearchUseCase) {
     useCase = searchUseCase
-    bindActions()
     loadRecentSearches()
   }
   
-  func send(_ action: Action) {
-    actionSubject.send(action)
+  func send(_ action: Action) async {
+    switch action {
+    case .searchButtonTapped(let text):
+      saveRecentSearch(text: text)
+    case .deleteButtonTapped(let text):
+      deleteRecentSearch(text: text)
+    case .removeAllButtonTapped:
+      removeAllRecentSearches()
+    }
   }
 }
 
 private extension ViewModel {
   
-  func bindActions() {
-    actionSubject
-      .flatMap { [weak self] action -> AnyPublisher<State, Never> in
-        guard let self = self else { return Just(State()).eraseToAnyPublisher() }
-        switch action {
-        case .searchButtonTapped(let text):
-          return performSearch(text: text)
-        case .deleteButtonTapped(let text):
-          return deleteRecentSearch(text: text)
-        case .removeAllButtonTapped:
-          return removeAllRecentSearches()
-        }
-      }
-      .receive(on: RunLoop.main)
-      .sink { [weak self] newState in
-        self?.state = newState
-      }
-      .store(in: &cancellables)
-  }
-  
   func loadRecentSearches() {
     state.recentSearches = useCase.recentSearches
   }
   
-  func performSearch(text: String) -> AnyPublisher<State, Never> {
-    Just(text)
-      .map { text in
-        return self.saveRecentSearch(text: text)
-      }.eraseToAnyPublisher()
-  }
-  
-  func saveRecentSearch(text: String) -> State {
+  func saveRecentSearch(text: String) {
     useCase.saveSearchText(text)
-    var newState = state
-    newState.recentSearches = useCase.recentSearches
-    return newState
+    state.recentSearches = useCase.recentSearches
   }
   
-  func deleteRecentSearch(text: String) -> AnyPublisher<State, Never> {
+  func deleteRecentSearch(text: String) {
     useCase.deleteSearchText(text)
-    var newState = state
-    newState.recentSearches = useCase.recentSearches
-    return Just(newState).eraseToAnyPublisher()
+    state.recentSearches = useCase.recentSearches
   }
   
-  func removeAllRecentSearches() -> AnyPublisher<State, Never> {
+  func removeAllRecentSearches() {
     useCase.deleteAllRecentSearches()
-    var newState = state
-    newState.recentSearches = useCase.recentSearches
-    return Just(newState).eraseToAnyPublisher()
+    state.recentSearches = useCase.recentSearches
   }
+  
 }
