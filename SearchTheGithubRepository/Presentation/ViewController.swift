@@ -42,7 +42,6 @@ final class ViewController: UIViewController {
 private extension ViewController {
   func bindViewModel() {
     viewModel.$state
-      .map { $0.recentSearches }
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
         self?.tableView.reloadData()
