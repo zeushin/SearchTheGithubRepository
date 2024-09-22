@@ -28,7 +28,8 @@ struct GithubRepoSearchRepository: SearchRepository {
           SearchResultItem(
             thumbnail: URL(string: $0.owner.avatar_url ?? ""),
             title: $0.name,
-            desscription: $0.owner.login
+            desscription: $0.owner.login,
+            repositoryURL: URL(string: $0.html_url)
           )
         }
       )

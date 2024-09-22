@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import Kingfisher
+import SafariServices
 
 final class ViewController: UIViewController {
   
@@ -163,8 +164,11 @@ extension ViewController: UITableViewDelegate {
         searchBarSearchButtonClicked(searchController.searchBar)
       }
     case .searchResultCell:
-      // TODO: web view
-      break
+      if let url = viewModel.state.cellSearchReuslt(for: indexPath)?.repositoryURL {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .formSheet
+        present(safariVC, animated: true, completion: nil)
+      }
     case .none:
       break
     }

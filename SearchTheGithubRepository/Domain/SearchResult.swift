@@ -16,4 +16,5 @@ struct SearchResultItem {
   let thumbnail: URL?
   let title: String
   let desscription: String
+  let repositoryURL: URL?
 }
